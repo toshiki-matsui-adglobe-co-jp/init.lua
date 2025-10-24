@@ -17,7 +17,7 @@ vim.opt.showmode = false
 
 -- OSとNeovim間のクリップボードを同期
 vim.schedule(function()
-    vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard = "unnamedplus"
 end)
 
 -- 改行時にインデントを維持
@@ -47,9 +47,9 @@ vim.opt.splitbelow = true
 -- 特定の空白文字をエディタ内でどのように表示するかを設定
 vim.opt.list = true
 vim.opt.listchars = {
-    tab = "» ",
-    trail = "·",
-    nbsp = "␣"
+  tab = "» ",
+  trail = "·",
+  nbsp = "␣",
 }
 
 -- 置換をリアルタイムでプレビュー
@@ -57,6 +57,11 @@ vim.opt.inccommand = "split"
 
 -- カーソルがある行をハイライト表示
 vim.opt.cursorline = true
+
+-- カーソル行のハイライト色を設定
+vim.cmd([[
+  highlight CursorLine ctermbg=darkgray guibg=#333333 cterm=reverse gui=reverse
+]])
 
 -- カーソルの上下に最低限確保する画面行数
 vim.opt.scrolloff = 10
@@ -66,47 +71,43 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- 診断情報のキーマップ
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, {
-    desc = "診断情報のリストを開く"
+  desc = "診断情報のリストを開く",
 })
 
 -- 内蔵ターミナルで <Esc><Esc> でターミナルモードを終了
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", {
-    desc = "ターミナルモードを終了"
+  desc = "ターミナルモードを終了",
 })
 
 -- CTRL + hjkl でウィンドウ間を移動 VSCodeでは動作しない
 if not vim.g.vscode then
-    vim.keymap.set("n", "<C-h>", "<C-w><C-h>", {
-        desc = "左のウィンドウに移動"
-    })
-    vim.keymap.set("n", "<C-l>", "<C-w><C-l>", {
-        desc = "右のウィンドウに移動"
-    })
-    vim.keymap.set("n", "<C-j>", "<C-w><C-j>", {
-        desc = "下のウィンドウに移動"
-    })
-    vim.keymap.set("n", "<C-k>", "<C-w><C-k>", {
-        desc = "上のウィンドウに移動"
-    })
+  vim.keymap.set("n", "<C-h>", "<C-w><C-h>", {
+    desc = "左のウィンドウに移動",
+  })
+  vim.keymap.set("n", "<C-l>", "<C-w><C-l>", {
+    desc = "右のウィンドウに移動",
+  })
+  vim.keymap.set("n", "<C-j>", "<C-w><C-j>", {
+    desc = "下のウィンドウに移動",
+  })
+  vim.keymap.set("n", "<C-k>", "<C-w><C-k>", {
+    desc = "上のウィンドウに移動",
+  })
 end
 
--- vscodeの時はundoをCtrl+Zに割り当てる
+-- vscode拡張機能が有効な場合は、VSCodeのundo/redoを利用
 if vim.g.vscode then
-    vim.keymap.set("n", "<C-z>", "<cmd>undo<CR>", {
-        desc = "undo"
-    })
-    vim.keymap.set("n", "<C-y>", "<cmd>redo<CR>", {
-        desc = "redo"
-    })
+  vim.keymap.set("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>")
+  vim.keymap.set("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
 end
 
 -- テキストをヤンク（コピー）したときにハイライト表示
 vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "テキストをヤンクしたときにハイライト表示",
-    group = vim.api.nvim_create_augroup("highlight_yank", {
-        clear = true
-    }),
-    callback = function()
-        vim.highlight.on_yank()
-    end
+  desc = "テキストをヤンクしたときにハイライト表示",
+  group = vim.api.nvim_create_augroup("highlight_yank", {
+    clear = true,
+  }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
