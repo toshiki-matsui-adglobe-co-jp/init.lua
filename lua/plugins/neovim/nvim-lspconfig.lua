@@ -1,7 +1,6 @@
 return {
     -- メインのLSP設定
     'neovim/nvim-lspconfig',
-    enabled = not vim.g.vscode,
     dependencies = { -- LSPと関連ツールを自動的にインストール
     {
         'williamboman/mason.nvim',

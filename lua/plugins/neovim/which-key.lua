@@ -1,7 +1,6 @@
 return {
      -- 未設定のキーバインドを表示するのに便利なプラグイン
     'folke/which-key.nvim',
-    enabled = not vim.g.vscode,
     event = 'VimEnter', -- ロードイベントを 'VimEnter' に設定
     opts = {
       icons = {

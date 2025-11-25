@@ -8,8 +8,16 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local specs = {
+  { import = "plugins.common" },
+}
+
+if not vim.g.vscode then
+  table.insert(specs, { import = "plugins.neovim" })
+end
+
 require("lazy").setup({
-  spec = { { import = "plugins" } },
+  spec = specs,
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

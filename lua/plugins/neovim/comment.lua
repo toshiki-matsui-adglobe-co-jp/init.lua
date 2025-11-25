@@ -1,5 +1,6 @@
 return {
     'numToStr/Comment.nvim',
+    enabled = not vim.g.vscode,
     opts = {
         ---Add a space b/w comment and the line
         padding = true,

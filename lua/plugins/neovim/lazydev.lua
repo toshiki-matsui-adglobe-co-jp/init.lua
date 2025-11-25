@@ -2,7 +2,6 @@ return {
     -- Neovimの設定、ランタイム、プラグイン用のLua LSPを設定する 'lazydev' プラグイン
     -- Neovim APIの補完、注釈、シグネチャのために使用
     'folke/lazydev.nvim',
-    enabled = not vim.g.vscode,
     ft = 'lua',
     opts = {
       library = {

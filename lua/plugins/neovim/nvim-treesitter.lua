@@ -1,7 +1,6 @@
 return {
      -- コードのハイライト、編集、ナビゲーション
     'nvim-treesitter/nvim-treesitter',
-    enabled = not vim.g.vscode,
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- optsに使用するメインモジュールを設定
     -- Treesitterの設定
